@@ -2,6 +2,33 @@
   <div class="title">
     {{pageTitle}}
   </div>
-
+<div class="grid">
+  <div class="row">
+    <div class="cellFull">
+      <select [(ngModel)]="selectedProduct">
+        <option value="undefined" selected>--Select a product--</option>
+        @for( product of products() ; track product.id){
+     <option [ngValue]="product">{{product.productName}}</option>
+        }
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="cellLeft">Name:</div>
+    <div class="cellRight">{{selectedProduct()?.productName}}</div>
+  </div>
+  <div class="row">
+    <div class="cellLeft">Description:</div>
+    <div class="cellRight">{{selectedProduct()?.description}}</div>
+  </div>
+  <div class="row">
+    <div class="cellLeft">Price:</div>
+    <div class="cellRight">{{selectedProduct()?.price}}</div>
+  </div>
+  <div class="row">
+    <div class="cellLeft"><label for ='quantity'>Quantity:</label></div>
+    <div class="cellRight"><input class="quantityInput" id="quantity" type='number'[(ngModel)]="quantity"></div>
+  </div>
+</div>
 
 </div>
