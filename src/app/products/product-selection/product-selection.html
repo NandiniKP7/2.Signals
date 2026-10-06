@@ -23,12 +23,15 @@
   </div>
   <div class="row">
     <div class="cellLeft">Price:</div>
-    <div class="cellRight">{{selectedProduct()?.price}}</div>
+    <div class="cellRight">{{selectedProduct()?.price |currency}}</div>
   </div>
   <div class="row">
     <div class="cellLeft"><label for ='quantity'>Quantity:</label></div>
     <div class="cellRight"><input class="quantityInput" id="quantity" type='number'[(ngModel)]="quantity"></div>
   </div>
+  <div class="row">
+    <div class="cellLeft">Total:</div>
+    <div class="cellRight" [style.color]="color()">{{total()|currency}}</div>
+  </div>
 </div>
-
 </div>
