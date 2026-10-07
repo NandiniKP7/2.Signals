@@ -22,6 +22,9 @@ export class ProductSelection {
 
   })
  products =this.productService.productsResource.value
+ isLoading=this.productService.productsResource.isLoading;
+ error=this.productService.productsResource.error
+ errorMessage=computed(()=>this.error()? this.error()?.message:'')
  onIncrease(){
   this.quantity.update(q => q+1)
  }

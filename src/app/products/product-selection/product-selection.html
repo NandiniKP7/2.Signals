@@ -1,37 +1,50 @@
 <div class="content">
-  <div class="title">
-    {{pageTitle}}
-  </div>
-<div class="grid">
-  <div class="row">
-    <div class="cellFull">
-      <select [(ngModel)]="selectedProduct">
-        <option value="undefined" selected>--Select a product--</option>
-        @for( product of products() ; track product.id){
-     <option [ngValue]="product">{{product.productName}}</option>
-        }
-      </select>
+  <div class="title">{{pageTitle}}</div>
+  @if(isLoading()) {
+  <div>...Loading Products</div>
+  } 
+  @else if(errorMessage()){
+ <div style="color:red"> An Error Occured :{{errorMessage()}}</div>
+  }
+  @else{
+  <div class="grid">
+    <div class="row">
+      <div class="cellFull">
+        <select [(ngModel)]="selectedProduct">
+          <option value="undefined" selected>--Select a product--</option>
+          @for( product of products() ; track product.id){
+          <option [ngValue]="product">{{product.productName}}</option>
+          }
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="cellLeft">Name:</div>
+      <div class="cellRight">{{selectedProduct()?.productName}}</div>
+    </div>
+    <div class="row">
+      <div class="cellLeft">Description:</div>
+      <div class="cellRight">{{selectedProduct()?.description}}</div>
+    </div>
+    <div class="row">
+      <div class="cellLeft">Price:</div>
+      <div class="cellRight">{{selectedProduct()?.price |currency}}</div>
+    </div>
+    <div class="row">
+      <div class="cellLeft"><label for="quantity">Quantity:</label></div>
+      <div class="cellRight">
+        <input
+          class="quantityInput"
+          id="quantity"
+          type="number"
+          [(ngModel)]="quantity"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="cellLeft">Total:</div>
+      <div class="cellRight" [style.color]="color()">{{total()|currency}}</div>
     </div>
   </div>
-  <div class="row">
-    <div class="cellLeft">Name:</div>
-    <div class="cellRight">{{selectedProduct()?.productName}}</div>
-  </div>
-  <div class="row">
-    <div class="cellLeft">Description:</div>
-    <div class="cellRight">{{selectedProduct()?.description}}</div>
-  </div>
-  <div class="row">
-    <div class="cellLeft">Price:</div>
-    <div class="cellRight">{{selectedProduct()?.price |currency}}</div>
-  </div>
-  <div class="row">
-    <div class="cellLeft"><label for ='quantity'>Quantity:</label></div>
-    <div class="cellRight"><input class="quantityInput" id="quantity" type='number'[(ngModel)]="quantity"></div>
-  </div>
-  <div class="row">
-    <div class="cellLeft">Total:</div>
-    <div class="cellRight" [style.color]="color()">{{total()|currency}}</div>
-  </div>
-</div>
+  }
 </div>
